@@ -17,24 +17,23 @@ var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'root',
-    database: 'employees',
-    port: 8889
-});
-
-var db2 = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
     database: 'test',
     port: 8889
 });
+var db2 = mysql.createConnection({
+    host: '25.55.116.246',
+    user: 'remoteRoot',
+    password: 'remoteRoot',
+    database: 'employees',
+    port: 3306
+});
 
 var db3 = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    database: 'test1',
-    port: 8889
+    host: '25.103.227.3',
+    user: 'remoteRoot',
+    password: 'heslo123',
+    database: 'employees',
+    port: 3306
 });
 
 const postDataFromJSONDB3 = async () => {
@@ -52,7 +51,7 @@ const postDataFromJSONDB3 = async () => {
         else{
             fileData.forEach(async (query)=>{
                 console.log("QUERY", query)
-                await axios.post('http://localhost:4000/api/v1/employees', {
+                await axios.post('http://localhost:8000/api/v1/employees', {
                     firstName:query.values[0],
               lastName:query.values[1],
               email:query.values[2],
@@ -87,7 +86,7 @@ const postDataFromJSONDB2 = async () => {
         else{
             fileData.forEach(async (query)=>{
                 console.log("QUERY", query)
-                await axios.post('http://localhost:4000/api/v1/employees', {
+                await axios.post('http://localhost:8000/api/v1/employees', {
                     firstName:query.values[0],
               lastName:query.values[1],
               email:query.values[2],
@@ -137,7 +136,7 @@ db.connect((err)=>{
 });
 
 const server = {
-    port: 4000
+    port: 8000
   };
 
 getEmployees(app,db, db2)
